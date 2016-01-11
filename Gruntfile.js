@@ -33,7 +33,7 @@ module.exports = function(grunt) {
   // Default task(s).
   //grunt.registerTask('default', ['']);
 
-  grunt.registerTask('myServer', ['express', 'express-keepalive']);
+  grunt.registerTask('server', ['express', 'express-keepalive']);
 
   // grunt.registerTask('default', 'Log some stuff.', function() {
   //   grunt.log.write('Logging some stuff...').ok();
