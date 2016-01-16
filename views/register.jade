@@ -1,0 +1,39 @@
+extends layout
+
+block content
+  h1= title
+  p Register and account
+  .login_container
+    form#register_form(
+      action="/users/register"
+      method="post"
+    )
+      .first_name
+        input(
+          name="first_name"
+          type="text"
+          placeholder="First Name"
+        )
+      .last_name
+        input(
+          name="last_name"
+          type="text"
+          placeholder="Last Name"
+        )
+      .email
+        input(
+          name="email"
+          type="text"
+          placeholder="Email"
+        )
+      .password
+        input(
+          name="password"
+          type="password"
+          placeholder="Password"
+        )
+      .buttons
+        input(
+          name="submit"
+          type="submit"
+          )

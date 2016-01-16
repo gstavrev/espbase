@@ -4,4 +4,21 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    block content
+    .header
+      ul.nav_bar
+        li
+          a.login_link(
+            href="/users/login"
+          ) Login
+
+        li
+          a.login_link(
+            href="/users/register"
+          ) Register
+
+        li
+          a.login_link(
+            href="/users/logout"
+          ) Logout
+
+      block content

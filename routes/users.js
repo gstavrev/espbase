@@ -33,6 +33,11 @@ router.post('/register', function (req, res) {
   });
 });
 
+router.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
+
 router.post('/login', function (req, res, next){
   console.log("post to /login!");
   //gdone = function(){console.log("done!!!!!")};
@@ -43,7 +48,6 @@ router.post('/login', function (req, res, next){
     passReqToCallback : true
   })(req, res, next);
 
-
   // passport.authenticate('local')(req, res, function () {
   //   console.log("Logged in!");
   //   res.redirect('/users');
@@ -53,7 +57,11 @@ router.post('/login', function (req, res, next){
 });
 
 router.get('/login', function (req, res){
-  res.render('login', { title: 'Login page', message: 'Hello from the login page!'});
+  res.render('login', { title: 'Login', message: 'Please login.'});
+});
+
+router.get('/register', function (req, res){
+  res.render('register', { title: 'Registration', message: 'Register an account'});
 });
 
 module.exports = router;
