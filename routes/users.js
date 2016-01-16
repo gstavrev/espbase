@@ -17,15 +17,12 @@ router.get('/', authController.isAuthenticated, function(req, res) {
 
 /* POST new users*/
 router.post('/', function (req, res) {
-  console.log("User post! : " + JSON.stringify(req.body));
-  //var user_info = req.body;
   user = models.User.new(req.body, function(user){
     res.send('POST request for user' + JSON.stringify(user));
   });
 });
 
 router.post('/register', function (req, res) {
-  console.log("/register" + JSON.stringify(req.body));
   user = models.User.register(req.body, function(user){
     if (user){
       res.redirect('/')
@@ -36,12 +33,27 @@ router.post('/register', function (req, res) {
   });
 });
 
-router.post('/login', passport.authenticate('local',
+router.post('/login', function (req, res, next){
+  console.log("post to /login!");
+  //gdone = function(){console.log("done!!!!!")};
+  passport.authenticate('local',
   {
 	  successRedirect: '/users',
-	  failureRedirect: '/login_redirected'
-  })
-);
+	  failureRedirect: '/users/login',
+    passReqToCallback : true
+  })(req, res, next);
 
+
+  // passport.authenticate('local')(req, res, function () {
+  //   console.log("Logged in!");
+  //   res.redirect('/users');
+  //   console.log("done Logged in!");
+  // });
+
+});
+
+router.get('/login', function (req, res){
+  res.render('login', { title: 'Login page', message: 'Hello from the login page!'});
+});
 
 module.exports = router;
