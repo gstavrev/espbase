@@ -34,8 +34,6 @@ passport.use(new LocalStrategy({ usernameField: 'email'},
           }
           else {
             return done(null,valid_user)
-            //return done(null, valid_user);
-            //passport.serializeUser(user,done);
           }
         })
       }
@@ -43,9 +41,7 @@ passport.use(new LocalStrategy({ usernameField: 'email'},
   }
 ));
 
-
 exports.isAuthenticated = function (req, res, next) {
-  //console.log("isAuthenticated");
   // if user is authenticated in the session, call the next() to call the next request handler
   // Passport adds this method to request object. A middleware is allowed to add properties to
   // request and response objects
@@ -54,13 +50,3 @@ exports.isAuthenticated = function (req, res, next) {
   // if the user is not authenticated then redirect him to the login page
   res.redirect('/users/login');
 };
-
-//exports.isAuthenticated = passport.authenticate('local', { session : true });
-
-// exports.IsAuthenticated = function(req, res, next){
-//   if(req.isAuthenticated()){
-//     next();
-//   } else {
-//     next(new Error(401));
-//   }
-// }

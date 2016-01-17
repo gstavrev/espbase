@@ -5,12 +5,11 @@ var authController = require('../controllers/auth');
 var router = express.Router();
 var models  = require('../models');
 
-/* GET users listing. */
-//router.route('/').get(authController.isAuthenticated, function(req, res, next) {
 
+// Authentication required route
 router.get('/', authController.isAuthenticated, function(req, res) {
   var total = models.User.count().then(function(total){
-      res.send('number of users: ' + total);
+    res.render('default', { title: 'Users', message: 'Number of users ' + total});
     }
   );
 });
@@ -40,20 +39,12 @@ router.get('/logout', function(req, res){
 
 router.post('/login', function (req, res, next){
   console.log("post to /login!");
-  //gdone = function(){console.log("done!!!!!")};
   passport.authenticate('local',
   {
 	  successRedirect: '/users',
 	  failureRedirect: '/users/login',
     passReqToCallback : true
   })(req, res, next);
-
-  // passport.authenticate('local')(req, res, function () {
-  //   console.log("Logged in!");
-  //   res.redirect('/users');
-  //   console.log("done Logged in!");
-  // });
-
 });
 
 router.get('/login', function (req, res){
